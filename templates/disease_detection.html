@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="disease-detection">
+    <h1>Disease Detection</h1>
+    <div class="upload-section">
+        <h2>Upload Crop Image</h2>
+        <input type="file" id="cropImageUpload" accept="image/*">
+        <button onclick="analyzeImage()">Analyze Image</button>
+    </div>
+    <div class="results-section">
+        <h2>Detection Results</h2>
+        <div id="results">
+            <p><strong>Disease Name:</strong> <span id="diseaseName">-</span></p>
+            <p><strong>Confidence Score:</strong> <span id="confidenceScore">-</span></p>
+            <p><strong>Recommendations:</strong> <span id="recommendations">-</span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function analyzeImage() {
+        const fileInput = document.getElementById('cropImageUpload');
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Simulate analysis results (replace with actual API call)
+                document.getElementById('diseaseName').textContent = 'Leaf Rust';
+                document.getElementById('confidenceScore').textContent = '95%';
+                document.getElementById('recommendations').textContent = 'Apply fungicide and remove infected leaves.';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please upload an image first.');
+        }
+    }
+</script>
+{% endblock %}

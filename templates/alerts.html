@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="alerts">
+    <h1>Alerts</h1>
+    <div class="alert-list">
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Message</th>
+                    <th>Severity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2023-10-01 10:30 AM</td>
+                    <td>Low soil moisture detected in Field A.</td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>2023-10-01 09:15 AM</td>
+                    <td>Temperature spike detected in Greenhouse B.</td>
+                    <td class="severity-medium">Medium</td>
+                </tr>
+                <tr>
+                    <td>2023-10-01 08:00 AM</td>
+                    <td>Irrigation system activated in Field C.</td>
+                    <td class="severity-low">Low</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .severity-high {
+        color: red;
+        font-weight: bold;
+    }
+    .severity-medium {
+        color: orange;
+        font-weight: bold;
+    }
+    .severity-low {
+        color: green;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

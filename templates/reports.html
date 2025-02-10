@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="reports">
+    <h1>Reports</h1>
+    <div class="report-controls">
+        <label for="reportType">Select Report Type:</label>
+        <select id="reportType">
+            <option value="waterUsage">Water Usage</option>
+            <option value="cropHealth">Crop Health</option>
+            <option value="weather">Weather</option>
+        </select>
+        <button onclick="generateReport()">Generate Report</button>
+    </div>
+    <div class="report-output">
+        <h2>Generated Report</h2>
+        <pre id="reportContent">Select a report type and click "Generate Report".</pre>
+        <button onclick="downloadReport()">Download Report (PDF/CSV)</button>
+    </div>
+</div>
+
+<script>
+    function generateReport() {
+        const reportType = document.getElementById('reportType').value;
+        let reportContent = '';
+
+        if (reportType === 'waterUsage') {
+            reportContent = 'Water Usage Report:\n\nField A: 500L\nField B: 300L\nField C: 450L';
+        } else if (reportType === 'cropHealth') {
+            reportContent = 'Crop Health Report:\n\nField A: Healthy\nField B: Minor Issues\nField C: Healthy';
+        } else if (reportType === 'weather') {
+            reportContent = 'Weather Report:\n\nTemperature: 25°C\nHumidity: 60%\nRainfall: 10mm';
+        }
+
+        document.getElementById('reportContent').textContent = reportContent;
+    }
+
+    function downloadReport() {
+        alert('Report downloaded!');
+    }
+</script>
+{% endblock %}

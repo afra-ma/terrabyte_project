@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Dashboard</h1>
+    <div class="charts">
+        <div class="chart">
+            <h2>Soil Moisture</h2>
+            <canvas id="soilMoistureChart"></canvas>
+        </div>
+        <div class="chart">
+            <h2>Temperature</h2>
+            <canvas id="temperatureChart"></canvas>
+        </div>
+        <div class="chart">
+            <h2>Humidity</h2>
+            <canvas id="humidityChart"></canvas>
+        </div>
+        <div class="chart">
+            <h2>Smoke</h2>
+            <canvas id="smokeChart"></canvas>
+        </div>
+    </div>
+    <div class="quick-actions">
+        <button onclick="startIrrigation()">Start Irrigation</button>
+        <button onclick="detectDisease()">Detect Disease</button>
+    </div>
+</div>
+
+<script>
+    // Data passed from Flask
+    const labels = { labels | tojson };
+    const soilData = { soil_data | tojson };
+    const temperatureData = {temperature_data|tojson} ;
+    const humidityData = { humidity_data | tojson };
+    const smokeData = { smoke_data | tojson };
+
+    // Initialize charts
+    document.addEventListener("DOMContentLoaded", function() {
+        const soilMoistureCtx = document.getElementById('soilMoistureChart').getContext('2d');
+        const temperatureCtx = document.getElementById('temperatureChart').getContext('2d');
+        const humidityCtx = document.getElementById('humidityChart').getContext('2d');
+        const smokeCtx = document.getElementById('smokeChart').getContext('2d');
+
+        new Chart(soilMoistureCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Soil Moisture',
+                    data: soilData,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(temperatureCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Temperature',
+                    data: temperatureData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(humidityCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Humidity',
+                    data: humidityData,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(smokeCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Smoke',
+                    data: smokeData,
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
